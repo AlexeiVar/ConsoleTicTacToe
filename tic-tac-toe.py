@@ -43,24 +43,35 @@ def check_win(n):
                 print(f"Победили {player}")
                 return True
 
+
+# Функция проверяет правильность вставления координат
+def check(a, b):
+    a,b = int(a), int(b)
+    if a > 2 or b > 2:
+        print("Значение вне поля, выберите правильное место")
+        return False
+    elif game_status[int(a)][int(b)] == ('X' or 'O'):
+        print("Место уже занято, выберите другое место")
+        return False
+    return True
+
+
 # Оба просто ставят символ куда надо с проверкой что свободно
 def put_x():
-    cords = input("Введите строку и столб без пробела в которую хотите поставить крестик")
-    a, b = list(cords.strip())
-    while game_status[int(a)][int(b)] == ('X' or 'O'):
-        print("Место уже занято, выберите другое место")
+    while True:
         cords = input("Введите строку и столб без пробела в которую хотите поставить крестик")
         a, b = list(cords.strip())
+        if check(a, b):
+            break
     game_status[int(a)][int(b)] = 'X'
 
 
 def put_o():
-    cords = input("Введите строку и столб без пробела в которую хотите поставить нолик")
-    a, b = list(cords.strip())
-    while game_status[int(a)][int(b)] == ('X' or 'O'):
-        print("Место уже занято, выберите другое место")
+    while True:
         cords = input("Введите строку и столб без пробела в которую хотите поставить нолик")
         a, b = list(cords.strip())
+        if check(a, b):
+            break
     game_status[int(a)][int(b)] = 'O'
 
 
