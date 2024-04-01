@@ -1,4 +1,4 @@
-def status(): # Просто печатаю поле
+def status():  # Просто печатаю поле
     print(" ", 0, 1, 2)
     i = 0
     for row in game_status:
@@ -46,7 +46,7 @@ def check_win(n):
 
 # Функция проверяет правильность вставления координат
 def check(a, b):
-    a,b = int(a), int(b)
+    a, b = int(a), int(b)
     if a > 2 or b > 2:
         print("Значение вне поля, выберите правильное место")
         return False
@@ -75,6 +75,12 @@ def put_o():
     game_status[int(a)][int(b)] = 'O'
 
 
+# Функция проверяет если ничья
+def check_draw():
+    res = any('-' in sub for sub in game_status)
+    return not res
+
+
 game_status = [
     ["-", "-", "-"],
     ["-", "-", "-"],
@@ -84,9 +90,15 @@ status()
 while True:
     put_x()
     status()
+    if check_draw():
+        print("Ничья")
+        break
     if check_win("X"):
         break
     put_o()
     status()
+    if check_draw():
+        print("Ничья")
+        break
     if check_win("O"):
         break
